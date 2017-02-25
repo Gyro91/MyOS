@@ -3,7 +3,7 @@
     mov bp, 0x9000
     mov sp, bp
     
-    mov bx , MSG_REAL_MODE
+    mov bx, MSG_REAL_MODE
     call print_string
   
     call switch_to_pm
@@ -12,9 +12,9 @@
     
     ; Hang
     %include "print_string.asm"
-    %include "print_string_pm.asm"
-    %include "gdt.asm"
-    %include "switch_to_pm.asm"
+    %include "32bit-print.asm"
+    %include "32bit-gdt.asm"
+    %include "32bit-switch.asm"
     
 [bits 32]
     ; This is where we arrive after switching
