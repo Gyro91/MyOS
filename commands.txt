@@ -1,0 +1,6 @@
+$HOME/opt/cross/bin/$TARGET-gcc  -ffreestanding -c kernel.c -o kernel.o -fno-exceptions
+HOME/opt/cross/bin/$TARGET-ld -Ttext 0x1000 kernel.o -m elf_i386 -o kernel.elf 
+$HOME/opt/cross/bin/$TARGET-objcopy --remove-section=.comment --remove-section=.eh_frame kernel.elf kernel.elf 
+$HOME/opt/cross/bin/$TARGET-objcopy -O binary kernel.elf kernel.bin
+ndisasm -b 32 kernel.bin
+
