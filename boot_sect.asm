@@ -6,9 +6,6 @@ KERNEL_OFFSET equ 0x1000
     
     mov bp, 0x9000
     mov sp, bp
-    
-    mov bx, MSG_REAL_MODE
-    call print_string
   
     call load_kernel
 
@@ -17,16 +14,17 @@ KERNEL_OFFSET equ 0x1000
     jmp $
     
     ; Hang
-    %include "32bit-print.asm"
-    %include "print_hex.asm"
-    %include "boot_sect_disk.asm"
-    %include "32bit-gdt.asm"
-    %include "32bit-switch.asm"
+    %include "asmSrc/32bit-print.asm"
+    %include "asmSrc/print_string.asm"
+    %include "asmSrc/print_hex.asm"
+    %include "asmSrc/boot_sect_disk.asm"
+    %include "asmSrc/32bit-gdt.asm"
+    %include "asmSrc/32bit-switch.asm"
 [bits 16]
 
 load_kernel:
     mov bx, MSG_LOAD_KERNEL
-    call print_string
+   ; call print_string
 
     mov bx, KERNEL_OFFSET
     mov dh, 15
@@ -46,7 +44,6 @@ BEGIN_PM:
     
     ; Global variables
     BOOT_DRIVE db 0    
-    MSG_REAL_MODE db 'Started in 16-bit real mode', 0
     MSG_PROT_MODE db 'Successfully landed in 32-bit mode', 0
     MSG_LOAD_KERNEL db "Loading kernel into memory", 0   
     ; Bootsector padding
