@@ -14,12 +14,12 @@ KERNEL_OFFSET equ 0x1000
     jmp $
     
     ; Hang
-    %include "asmSrc/32bit-print.asm"
-    %include "asmSrc/print_string.asm"
-    %include "asmSrc/print_hex.asm"
-    %include "asmSrc/boot_sect_disk.asm"
-    %include "asmSrc/32bit-gdt.asm"
-    %include "asmSrc/32bit-switch.asm"
+    %include "boot/32bit-print.asm"
+    %include "boot/print_string.asm"
+    %include "boot/print_hex.asm"
+    %include "boot/boot_sect_disk.asm"
+    %include "boot/32bit-gdt.asm"
+    %include "boot/32bit-switch.asm"
 [bits 16]
 
 load_kernel:
