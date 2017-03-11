@@ -21,9 +21,8 @@ kernel.elf: kernel.o
 	$(OBJ) --remove-section=.comment --remove-section=.eh_frame kernel.elf kernel.elf
 
 kernel.o: $(C_SOURCES)
-	$(CC) -ffreestanding -c $(C_SOURCES) -o kernel.o -fno-exceptions
-	
+	$(CC) -ffreestanding -c $< -o $@ -fno-exceptions
+
 clean:
 	rm *.bin *.o *.elf os-image
-	
-	
+
