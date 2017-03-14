@@ -1,5 +1,5 @@
 HOME=/home/matteo
-
+CFLAGS= -Wall -g  
 CC=$(HOME)/opt/cross/bin/i686-elf-gcc
 LD=$(HOME)/opt/cross/bin/i686-elf-ld
 OBJ=$(HOME)/opt/cross/bin/i686-elf-objcopy
@@ -16,13 +16,14 @@ boot_sect.bin:
 kernel.bin: kernel.elf
 	$(OBJ) -O binary kernel.elf kernel.bin
 
-kernel.elf: kernel.o 
-	$(LD) -Ttext 0x1000 kernel.o -m elf_i386 -o kernel.elf
+kernel.elf: $(OBJ_FILES) 
+	$(LD) -Ttext 0x1000  $(OBJ_FILES) -T link.ld -m elf_i386 -o kernel.elf
 	$(OBJ) --remove-section=.comment --remove-section=.eh_frame kernel.elf kernel.elf
 
-kernel.o: $(C_SOURCES)
-	$(CC) -ffreestanding -c $< -o $@ -fno-exceptions
+%.o: %.c
+	$(CC) $(CFLAGS) -ffreestanding -c startup_kernel_c/kernel.c -o startup_kernel_c/kernel.o -fno-exceptions
+	$(CC) $(CFLAGS) -ffreestanding -c $< -o $@ -fno-exceptions
 
 clean:
-	rm *.bin *.o *.elf os-image
-
+	rm -rf *.bin *.o *.elf os-image
+	rm -rf kernel/*.o boot/*.o drivers/*.o boot/*.o
