@@ -1,3 +1,9 @@
+Debug
+.*
+drivers/#*
+kernel/#*
+*.o
+*/*.o
 .*.swp
 .*.swo
 #*#
