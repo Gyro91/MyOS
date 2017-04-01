@@ -2,7 +2,7 @@
 #ifndef __PMIO_FUNC_H__
 #define __PMIO_FUNC_H__
 
-#include "..include/types.h"
+#include "../include/types.h"
 
 /*
  * This library provides the basic functions for performing

@@ -7,7 +7,7 @@ void main()
   *video_memory = 'X';
 
   print_char('Y', 0, 0, RED_ON_BLACK);
-
+  cursor(0, 1);
 
   while(1);
 }

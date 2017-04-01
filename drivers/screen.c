@@ -1,5 +1,5 @@
 #include "screen.h"
-#include "../include/types.h"
+#include "../kernel/PMIO_func.h"
 
 
 /*
@@ -40,5 +40,20 @@ void clear_screen(uint8_t attribute_byte)
 		for(j = 0; j < MAX_COLS; j++) {
 			memory_video[(i * MAX_COLS) + j] = tmp_char;
 		}
+
+}
+
+/* It updates the cursor position with the passed parameters. */
+
+void cursor(uint8_t x, uint8_t y)
+{
+	uint16_t position = (x * MAX_ROWS) + y;
+
+	port_byte_out(REG_SCREEN_IND, REG_SCREEN_CURSOR_H);
+	port_byte_out(REG_SCREEN_DATA, position >> 8);
+
+
+	port_byte_out(REG_SCREEN_IND, REG_SCREEN_CURSOR_L);
+	port_byte_out(REG_SCREEN_DATA, position);
 
 }
