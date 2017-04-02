@@ -20,7 +20,7 @@ kernel.elf: $(OBJ_FILES)
 	$(LD) -Ttext 0x1000  $(OBJ_FILES) -T link.ld -m elf_i386 -o kernel.elf
 	$(OBJ) --remove-section=.comment --remove-section=.eh_frame kernel.elf kernel.elf
 
-%.o: %.c
+%.o: %.c %.h
 	$(CC) $(CFLAGS) -ffreestanding -c startup_kernel_c/kernel.c -o startup_kernel_c/kernel.o -fno-exceptions
 	$(CC) $(CFLAGS) -ffreestanding -c $< -o $@ -fno-exceptions
 
