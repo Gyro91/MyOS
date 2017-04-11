@@ -14,15 +14,12 @@ void print_char(uint8_t character, uint8_t col, uint8_t row,
     uint16_t *memory_video = (uint16_t *) VIDEO_ADDRESS;
     uint16_t tmp_char = attribute_byte;
 
-
     /* In text mode the most significant byte defines the color
      * and the least significant is the character */
     tmp_char = tmp_char << 8;
     tmp_char |= character;
-
     memory_video[(row * MAX_COLS) + col] = tmp_char;
 }
-
 
 /*
  * This function clears the screen with all space characters
@@ -31,16 +28,14 @@ void print_char(uint8_t character, uint8_t col, uint8_t row,
 
 void clear_screen(uint8_t attribute_byte)
 {
-	uint16_t i, j;
+	uint16_t i, j, tmp_char = attribute_byte;;
 	uint16_t *memory_video = (uint16_t *) VIDEO_ADDRESS;
-	uint16_t tmp_char = attribute_byte;
 
 	tmp_char |= ' ';
 	for(i = 0; i < MAX_ROWS; i++)
 		for(j = 0; j < MAX_COLS; j++) {
 			memory_video[(i * MAX_COLS) + j] = tmp_char;
 		}
-
 }
 
 /* It updates the cursor position with the passed parameters. */
@@ -52,8 +47,6 @@ void cursor(uint8_t x, uint8_t y)
 	port_byte_out(REG_SCREEN_IND, REG_SCREEN_CURSOR_H);
 	port_byte_out(REG_SCREEN_DATA, position >> 8);
 
-
 	port_byte_out(REG_SCREEN_IND, REG_SCREEN_CURSOR_L);
 	port_byte_out(REG_SCREEN_DATA, position);
-
 }

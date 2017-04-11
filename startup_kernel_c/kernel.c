@@ -1,13 +1,17 @@
 #include "../drivers/screen.h"
+#include "../drivers/keyboard.h"
 
 void main()
 {
-  char *video_memory = (char *) 0xb8000;
+  uint8_t val;
 
-  *video_memory = 'X';
+  keyboard_init();
 
-  print_char('Y', 0, 0, RED_ON_BLACK);
-  cursor(0, 1);
+  clear_screen(RED_ON_BLACK);
 
+  while (1) {
+	  val = read_char();
+	  print_char(val, 0, 0, RED_ON_BLACK);
+  }
   while(1);
 }
