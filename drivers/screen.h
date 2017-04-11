@@ -29,8 +29,15 @@
 
 #include "../include/types.h"
 
-extern void print_char(uint8_t c, uint8_t col, uint8_t row, uint8_t attribute_byte);
+extern void print_char(uint8_t c, uint8_t attribute_byte);
 extern void clear_screen(uint8_t attribute_byte);
-extern void cursor(uint8_t x, uint8_t y);
+extern void set_cursor(uint16_t x, uint16_t y);
+extern void screen_init();
+
+typedef struct cursor {
+	uint16_t row;
+	uint16_t column;
+} cursor;
+
 
 #endif
